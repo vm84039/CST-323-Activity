@@ -1,40 +1,109 @@
 <?php
 
 namespace App\Services\Data;
+use App\Models\AdminModel;
 use App\Models\StudentModel;
 use Illuminate\Support\Facades\DB;
 
-class SecurityDAO {
-    public function __construct() { // A constructor.
+class SecurityDAO
+{
+    public function __construct()
+    { // A constructor.
     }
-    
-    public function getConnection() {  //Function that establishes an MySQL connection in the AWS cloud database.  Returns the connection
-        // The default Server settings.
-        $mysql_host = "localhost";
-        $mysql_database = "mysql";
-        $mysql_user = "root";
-        $mysql_password = "";
-        $mysql_port = "3306";
-        
-        // Creates an SQL connection.
-        $conn = mysqli_connect($mysql_host, $mysql_user, $mysql_password, $mysql_database, $mysql_port);
-        
-        // Checks the SQL connection.
-        if (!$conn) {
-            die("Connection failed: " . mysqli_connect_error()); // For failed SQL connections.
+
+//**************************************Student******************************************
+
+    public function getAllStudents(): \Illuminate\Support\Collection
+    {
+        return DB::table('ActivityDB.Student')->get();
+    }
+
+    public function insertStudent(StudentModel $student)
+    {
+        // Assigning data from fields to variables
+        DB::table('ActivityDB.Student')->insert([
+            'FirstName' => $student->getFirstName(),
+            'LastName' => $student->getLastName(),
+            'Age' => $student->getAge(),
+            'EnrollmentYear' => $student->getEnrollmentYear()
+        ]);
+    }
+
+    public function updateStudent(StudentModel $student): int
+    {
+        return DB::update('update ActivityDB.Student set
+            FirstName = ?,
+            LastName = ?,
+            Age = ?,
+            EnrollmentYear = ? WHERE
+            StudentID = ?', [$student->getFirstName(), $student->getLastName(), $student->getStringAge(), $student->getEnrollmentYear(), $student->getId()]
+        );
+    }
+
+    public function deleteStudent(int $id): int
+    {
+        return DB::table('ActivityDB.Student')->where('StudentID', '=', $id)->delete();
+    }
+
+    public function selectStudent(int $id): StudentModel
+    {
+        $student = new StudentModel('', '', 1, 1);
+        $temps = DB::table('ActivityDB.Student')
+            ->select('StudentID', 'FirstName', 'LastName', 'Age', 'EnrollmentYear')
+            ->where('StudentID', '=', $id)
+            ->get();
+        foreach ($temps as $temp) {
+            $student = new StudentModel($temp->FirstName, $temp->LastName, $temp->Age, $temp->EnrollmentYear);
+            $student->setId($temp->StudentID);
         }
-        
-        return $conn;
+        return $student;
     }
-    public function getAllStudents() { 
-        $conn = $this->getConnection();
-        $query = "SELECT * FROM Student";
-        $query_run = mysqli_query($conn, $query);
-        return $query_run;
+
+//**************************************Admin******************************************
+    public function emailDuplicate(string $email): bool
+    {
+        $temps = DB::table('ActivityDB.Admin')
+            ->select('AdminID', 'FirstName', 'LastName', 'Email', 'Password')
+            ->where('Email', '=', $email)
+            ->get();
+        if ($temps == NULL) {
+            return false;
+        }
+            return true;
+
+   }
+
+    public function insertAdmin(AdminModel $admin)
+    {
+        // Assigning data from fields to variables
+        DB::table('ActivityDB.Admin')->insert([
+            'FirstName' => $admin->getFirstName(),
+            'LastName' => $admin->getLastName(),
+            'Email' => $admin->getEmail(),
+            'Password' => $admin->getPassword()
+        ]);
     }
-    
 
-    
-
-    
+    public function selectAdmin(int $id): AdminModel
+    {
+        $admin = new AdminModel('', '', 1, 1);
+        $temps = DB::table('ActivityDB.Admin')
+            ->select('AdminID', 'FirstName', 'LastName', 'Email', 'Password')
+            ->where('AdminID', '=', $id)
+            ->get();
+        foreach ($temps as $temp) {
+            $admin = new AdminModel($temp->FirstName, $temp->LastName, $temp->Email, $temp->Password);
+            $admin->setId($temp->AdminID);
+        }
+        return $admin;
+    }
+    public function login(string $email, string $password): bool
+    {
+        if (DB::table('ActivityDB.Admin')
+            ->where('Email', $email)
+            ->where('Password', $password)->exists()) {
+                    return true;
+        }
+        else {return false;}
+    }
 }

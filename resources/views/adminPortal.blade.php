@@ -1,7 +1,7 @@
 @extends('layouts.appmaster')
 @section('content')
     <main class="page contact-us-page">
-        <section class="clean-block clean-form dark">
+        <section class="clean-block clean-form dark" >
             <section class="clean-block about-us">
                 <div class="container">
                     <div class="block-heading">
@@ -13,16 +13,7 @@
                                 <div class="card-body info"><a class="btn btn-primary btn-lg" role="button" href="studentRoster"><strong>Current Student Roster</strong><br><br></a></div>
                             </div>
                         </div>
-                        <div class="col-sm-6 col-lg-4">
-                            <div class="card text-center clean-card">
-                                <div class="card-body info"><a class="btn btn-primary btn-lg" role="button" href="admin"><strong>Current Teacher Roster</strong><br><strong>(Coming Soon)</strong></a></div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-lg-4">
-                            <div class="card text-center clean-card">
-                                <div class="card-body info"><a class="btn btn-primary btn-lg" role="button" href="admin"><strong>Current Course List</strong><br><strong>(Coming Soon)</strong><br></a></div>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
             </section></section>

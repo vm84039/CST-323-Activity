@@ -9,7 +9,3 @@ if (document.getElementsByClassName('clean-product').length > 0) {
         vanillaZoom.init('#product-preview');
     };
 }
-$(document).ready(function () {
-  $('#dtRoster').DataTable();
-  $('.dataTables_length').addClass('bs-select');
-});

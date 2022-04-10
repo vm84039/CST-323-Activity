@@ -5,31 +5,34 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class StudentModel
+class StudentModel extends Model
 {
-    private $studentId;
     private $firstName;
     private $lastName;
     private $age;
     private $enrollmentYear; 
+    private $courseID;
+    private $courseGrade;
+    private $password;
+    private $id;
     
-    /**
-     * @return mixed
-     */
+    protected $table = 'Student';
+    protected $primaryKey = 'studentID';
+    
+
     public function getId()
     {
         return $this->id;
     }
-    public function __construct($studentId, $firstName, $lastName, $age, $enrollmentYear) { // A constructor.
-        $this->studentId = $studentId;
+    public function __construct($firstName, $lastName, $age, $enrollmentYear) { // A constructor.
         $this->firstName = $firstName; 
         $this->lastName = $lastName; 
         $this->age = $age; 
         $this->enrollmentYear = $enrollmentYear;
-}
-    public function setId($studentId)
+    }
+    public function setId($id)
     {
-        $this->studentId = $studentId;
+        $this->id= $id;
     }
     public function getFirstName()
     {
@@ -45,6 +48,11 @@ class StudentModel
     {
         return $this->age;
     }
+    public function getStringAge()
+    {
+        return strval($this->age);
+    }
+    
 
     public function getEnrollmentYear()
     {
@@ -65,12 +73,59 @@ class StudentModel
     {
         $this->age = $age;
     }
-
+    
     public function setEnrollmentYear($enrollmentYear)
     {
         $this->enrollmentYear = $enrollmentYear;
     }
+    /**
+     * @return mixed
+     */
+    public function getCourseID()
+    {
+        return $this->courseID;
+    }
 
+    /**
+     * @return mixed
+     */
+    public function getCourseGrade()
+    {
+        return $this->courseGrade;
+    }
+
+    /**
+     * @param mixed $courseID
+     */
+    public function setCourseID($courseID)
+    {
+        $this->courseID = $courseID;
+    }
+
+    /**
+     * @param mixed $courseGrade
+     */
+    public function setCourseGrade($courseGrade)
+    {
+        $this->courseGrade = $courseGrade;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPassword()
+    {
+        return $this->password;
+    }
+    
+    /**
+     * @param mixed $password
+     */
+    public function setPassword($password)
+    {
+        $this->password = $password;
+    }
+    
 
      
 }

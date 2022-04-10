@@ -1,16 +1,17 @@
-<?php 
+<?php
 use App\Services\Data\SecurityDAO;
-    
+use App\Http\Controllers\StudentController;
+
 $DAO = new SecurityDAO();
-    $query_run = $DAO->getAllStudents();
+    $students= $DAO->getAllStudents();
 ?>
 @extends('layouts.appmaster')
 @section('content')
        <main class="page landing-page">
             <section class="container" data-bs-toggle="collapse">
-            	<a class="btn btn-primary" role="button" style="margin: 25px;padding: 20px;" href="newStudent"><strong>Add New Student</strong></a>
-            
-            	<form action="selectStudent" method="POST">
+            	<a class="btn btn-primary" role="button" style="margin: 25px;padding: 20px;" href="/newStudent"><strong>Add New Student</strong></a>
+
+            	<form action="/selectStudent" method="POST">
             		@csrf
                     <div class="mb-3"><label class="form-label" for="id"><strong>Student ID</strong></label>
                     	<input type="number" name="id" min="1" max="5000" required="">
@@ -24,8 +25,8 @@ $DAO = new SecurityDAO();
                         <h3>
                     <input type="search" placeholder="Search..." class="form-control search-input" data-table="student-list"/>
                 </h3></div>
-            </section> 
-        	<form action="deleteStudent" method="POST">
+            </section>
+        	<form action="/deleteStudent" method="POST">
                     @csrf
                     <table class="table table-striped mt32 student-list">
                         <thead>
@@ -34,24 +35,22 @@ $DAO = new SecurityDAO();
                                 <th>First Name</th>
                                 <th>Last Name</th>
                                 <th>Age</th>
-                                <th>Enrollment Year</th><th></th>                       
+                                <th>Enrollment Year</th><th></th>
                             </tr>
                         </thead>
                         <tbody>
         				<?php
-        						if($query_run){
-        							foreach($query_run as $row){
-        				?>                 
+        						foreach($students as $student){
+        				?>
                         <tr>
-                                <td><?php echo $row["StudentID"];?></td>
-         						<td><?php echo $row["FirstName"];?></td>
-         						<td><?php echo $row["LastName"];?></td>
-         						<td><?php echo $row["Age"];?></td>
-         						<td><?php echo $row["EnrollmentYear"];?></td><?php
-        						echo '<td><button  class="btn btn-primary" type="submit" name="studentID" value="'.$row['StudentID'].'" />Delete</button></td>'; 	 ?>  						
+                                <td><?php echo $student->StudentID;?></td>
+         						<td><?php echo $student->FirstName;?></td>
+         						<td><?php echo $student->LastName;?></td>
+         						<td><?php echo $student->Age;?></td>
+         						<td><?php echo $student->EnrollmentYear;?></td>
+         						<td><button  class="btn btn-primary" type="submit" name="studentID" value="<?php echo $student->StudentID;?>"> Delete</button></td>
                         </tr>
-                        <?php } ?>           
-                        </tbody>   
+                        </tbody>
                     <?php } ?>
                         <thead>
                             <tr>
@@ -59,20 +58,20 @@ $DAO = new SecurityDAO();
                                 <th>First Name</th>
                                 <th>Last Name</th>
                                 <th>Age</th>
-                                <th>Enrollment Year</th><th></th>                       
+                                <th>Enrollment Year</th><th></th>
                             </tr>
-                        </thead>               
+                        </thead>
                     </table>
-            </form>              	
-		</main>  
+            </form>
+		</main>
 		 @stop
 <script>
             (function(document) {
                 'use strict';
-    
+
                 var TableFilter = (function(myArray) {
                     var search_input;
-    
+
                     function _onInputSearch(e) {
                         search_input = e.target;
                         var tables = document.getElementsByClassName(search_input.getAttribute('data-table'));
@@ -86,7 +85,7 @@ $DAO = new SecurityDAO();
                             });
                         });
                     }
-    
+
                     return {
                         init: function() {
                             var inputs = document.getElementsByClassName('search-input');
@@ -96,13 +95,13 @@ $DAO = new SecurityDAO();
                         }
                     };
                 })(Array.prototype);
-    
+
                 document.addEventListener('readystatechange', function() {
                     if (document.readyState === 'complete') {
                         TableFilter.init();
                     }
                 });
-    
+
             })(document);
     </script>
 

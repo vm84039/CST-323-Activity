@@ -25,36 +25,36 @@
                 // Set the source of the zoomed image.
                 zoomedImage.style.backgroundImage = 'url('+ firstSmallImage.src +')';
                 firstSmallImage.classList.add('active');
-            }   
+            }
 
             // Change the selected image to be zoomed when clicking on the previews.
             container.addEventListener("click", function (event) {
                 var elem = event.target;
 
                 if (elem.classList.contains("small-preview")) {
-                    
+
                     var allSmallPreviews = container.querySelectorAll(".small-preview");
-                    
+
                     allSmallPreviews.forEach(function (preview) {
                         preview.classList.remove('active');
                     })
-                    
+
                     elem.classList.add('active');
-                    
+
                     var imageSrc = elem.src;
                     zoomedImage.style.backgroundImage = 'url('+ imageSrc +')';
                 }
             });
-            
+
             // Zoom image on mouse enter.
             zoomedImage.addEventListener('mouseenter', function(e) {
-                this.style.backgroundSize = "250%"; 
+                this.style.backgroundSize = "250%";
             }, false);
 
 
             // Show different parts of image depending on cursor position.
             zoomedImage.addEventListener('mousemove', function(e) {
-                
+
                 // getBoundingClientReact gives us various information about the position of the element.
                 var dimentions = this.getBoundingClientRect();
 
@@ -68,14 +68,14 @@
 
                 // Update the background position of the image.
                 this.style.backgroundPosition = xpercent+'% ' + ypercent+'%';
-            
+
             }, false);
 
 
             // When leaving the container zoom out the image back to normal size.
             zoomedImage.addEventListener('mouseleave', function(e) {
-                this.style.backgroundSize = "contain"; 
-                this.style.backgroundPosition = "left center"; 
+                this.style.backgroundSize = "contain";
+                this.style.backgroundPosition = "left center";
             }, false);
 
         }

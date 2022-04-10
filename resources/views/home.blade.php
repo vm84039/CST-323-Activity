@@ -1,9 +1,23 @@
-@extends('layouts.appmaster')
+@extends('layouts.app')
+
 @section('content')
-	<section class="clean-block clean-hero" style="background-image:url(&quot;/assets/img/tech/image4.jpg&quot;);color:rgba(9, 162, 255, 0.85);">
-        <div class="text">
-                <h2>Welcome to the Test School Database</h2>
-                <p></p>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">{{ __('Dashboard') }}</div>
+
+                <div class="card-body">
+                    @if (session('status'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('status') }}
+                        </div>
+                    @endif
+
+                    {{ __('You are logged in!') }}
+                </div>
             </div>
-    </section>
-@stop
+        </div>
+    </div>
+</div>
+@endsection
