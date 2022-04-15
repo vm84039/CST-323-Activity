@@ -1,5 +1,10 @@
 {
     "/js/app.js": "/js/app.js",
+    "/js/bootstrap.js": "/js/bootstrap.js",
+    "/js/theme.js": "/js/theme.js",
+    "/js/vanilla-zoom.js": "/js/vanilla-zoom.js",
+    "/js/bootstrap.min.js": "/js/bootstrap.min.js",
     "/css/app.css": "/css/app.css",
+    "/css/vanilla-zoom.min.css": "/css/vanilla-zoom.min.css",
     "/css/custom.css": "/css/custom.css"
 }
