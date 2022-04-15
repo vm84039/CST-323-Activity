@@ -8,7 +8,7 @@
     <header>
        @include('includes.header')
     </header>
-    <main style="margin-top:100px; padding-bottom: 5rem;" >
+    <main style="margin-top:100px; padding-bottom: 5rem;min-height:800px" >
             @yield('content')
     </main>
        <footer class="page-footer dark">
