@@ -48,8 +48,6 @@ Route::post('/selectStudent', 'App\Http\Controllers\StudentController@selectStud
 Route::post('/deleteStudent', 'App\Http\Controllers\StudentController@deleteStudent');
 Route::post('/addAdmin', 'App\Http\Controllers\AdminController@addAdmin');
 Route::post('/loginAdmin', 'App\Http\Controllers\AdminController@login');
-Route::post('/selectTeacher', 'App\Http\Controllers\TeacherController@selectTeacher');
-Route::post('/deleteTeacher', 'App\Http\Controllers\TeacherController@deleteTeacher');
 Route::get('/error', function() {
     return view('errorPage'); // Error Page.
 });

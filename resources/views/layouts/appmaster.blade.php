@@ -2,10 +2,15 @@
 <html>
     <head>
        @include('includes.head')
+        <title>Activity</title>
     </head>
-<body>
+<body min-height="100vh">
+    <header>
        @include('includes.header')
-       @yield('content')
+    </header>
+    <main style="margin-top:100px; " >
+            @yield('content')
+    </main>
        <footer class="page-footer dark">
            @include('includes.footer')
        </footer>
