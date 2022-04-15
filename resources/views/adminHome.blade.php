@@ -1,7 +1,7 @@
 @extends('layouts.appmaster')
 @section('content')
     <section class="clean-block clean-form dark">
-        <section class="clean-block clean-hero" style=" color:rgba(9, 162, 255, 0.85); ">
+        <section class="clean-block clean-hero" style=" color:rgba(9, 162, 255, 0.85); height: 800px">
             <div style="position: relative; color:rgb(9, 162, 255, 0.85);">
                 <img id="background"  src="{{ asset('assets/img/tech/highschool.jpg') }}" alt="High School"
                      style=" opacity: 0.2; position: absolute; height: 800px; width: 100%;" >

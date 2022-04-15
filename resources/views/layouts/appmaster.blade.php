@@ -4,11 +4,11 @@
        @include('includes.head')
         <title>Activity</title>
     </head>
-<body min-height="100vh">
+<body min-height="100vh" style="position: relative;">
     <header>
        @include('includes.header')
     </header>
-    <main style="margin-top:100px; " >
+    <main style="margin-top:100px; padding-bottom: 5rem;" >
             @yield('content')
     </main>
        <footer class="page-footer dark">
